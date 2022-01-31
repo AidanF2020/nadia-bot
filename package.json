@@ -1,0 +1,26 @@
+{
+  "name": "nadia-bot",
+  "version": "1.0.0",
+  "description": "A project aiming to improve my Javascript skills by developing a Discord bot with assorted simple functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AidanF2020/nadia-bot.git"
+  },
+  "author": "Aidan Fleming",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AidanF2020/nadia-bot/issues"
+  },
+  "homepage": "https://github.com/AidanF2020/nadia-bot#readme",
+  "keywords": [],
+  "dependencies": {
+    "discord.js": "^13.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.8.0"
+  }
+}
