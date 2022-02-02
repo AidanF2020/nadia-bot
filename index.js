@@ -1,15 +1,42 @@
-// Require the necessary discord.js classes
-const { Client, Intents } = require('discord.js');
-const dotenv = require('dotenv');
-dotenv.config();
+const fs = require('fs');
+const { Client, Collection, Intents } = require('discord.js');
+const { token } = require('./config.json');
 
-// Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-// When the client is ready, run this code (only once)
+client.commands = new Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	client.commands.set(command.data.name, command);
+}
+
 client.once('ready', () => {
 	console.log('Ready!');
 });
 
-// Login to Discord with your client's token
-client.login(process.env.DISCORD_TOKEN);
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	const command = client.commands.get(interaction.commandName);
+
+	if (!command) return;
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
+});
+
+client.login(token);
+
+// music
+// wiki
+// avatar
+
+
+
+https://discord.com/api/oauth2/authorize?client_id=834667441065689088&permissions=8&scope=applications.commands%20bot
