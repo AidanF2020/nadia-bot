@@ -25,7 +25,8 @@ client.on('interactionCreate', async interaction => {
 
 	try {
 		await command.execute(interaction);
-	} catch (error) {
+	}
+	catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
@@ -37,6 +38,4 @@ client.login(token);
 // wiki
 // avatar
 
-
-
-https://discord.com/api/oauth2/authorize?client_id=834667441065689088&permissions=8&scope=applications.commands%20bot
+// https://discord.com/api/oauth2/authorize?client_id=834667441065689088&permissions=8&scope=applications.commands%20bot
