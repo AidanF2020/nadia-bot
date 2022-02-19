@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const ytdl = require('ytdl-core');
 
-
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('play')
@@ -16,15 +15,8 @@ module.exports = {
 
 		const connection = await voiceChannel.join();
 
-		let downloadInfo = await ytdl.getInfo(youtubeLink);
-		await lib.discord.voice['@0.0.1'].tracks.play({
-		  channel_id: `${VOICE_CHANNEL}`,
-		  guild_id: `${context.params.event.guild_id}`,
-		  download_info: downloadInfo
-		});
-		return lib.discord.channels['@0.3.0'].messages.create({
-		  channel_id: `${context.params.event.channel_id}`,
-		  content: `Now playing **${downloadInfo.videoDetails.title}**`,
-		});
+		// Extract the video URL from the command
+		const url = interaction.options.getSting('song');
+		if (url) return interaction.reply(`The requested song is: \`${url}\``);
 	},
 };
